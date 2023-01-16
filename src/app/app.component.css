@@ -1,0 +1,10 @@
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.alert{
+    color: blue;
+}
+.vide{
+    color: red;
+}

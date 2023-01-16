@@ -1,0 +1,81 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-inverse">
+    <a class="navbar-brand">
+      {{title}}
+    </a>
+  </nav>
+</div>
+
+
+<div class="container">
+<!-- row = rangée -->
+<!--  12 colonnes -->
+<div class="row">
+<!-- créer bloc de 4  colonnes-->
+<div class="col-sm-4">
+  <div class="list-group">
+      <a  *ngFor="let  itme of products; index as indexNumber"
+        class="list-group-item list-group-item-action"
+        (click) = 'detailProuduit(itme)'>
+        {{indexNumber+1}} -
+        {{itme.nom}} 
+      </a> 
+  </div>
+</div>
+<!-- créer bloc de 8 colonnes -->
+<!-- *ngIf='objetDetail.prix' si le prix excite il va afficher les détails de produit -->
+<div class="col-sm-8" *ngIf='objetDetail.nom'> 
+  <!-- OPTIONAL CHAINING -->
+  <h1>{{objetDetail?.nom}}</h1>
+  <h4>{{objetDetail?.description}}</h4>
+  <h4>{{objetDetail?.couleur}}</h4>
+  <button class ="btn btn-danger"
+  (click) ='onDelete(objetDetail)'>
+  SUPPRIMER
+    
+  </button>
+
+</div>
+
+<div class="col-sm-8" *ngIf='!objetDetail.nom'>
+  <!-- TEXTE DE REMPLISSAGE PAR DEFAUT -->
+  <h1>Cliquez dans la liste pour voir le détail</h1>
+</div>
+<!-- Formulaire -->
+<div class="container form">
+  <h4>Entrez un nouveau produit</h4>
+  <h4> {{erreur}} </h4>
+  <label for="">Nom</label>
+  <input
+  type='text'
+  placeholder='titre du produit'
+  [(ngModel)]='itemNom'
+  >
+  <label for="">Couleur</label>
+  <input
+  type='text'
+  placeholder='couleur du produit'
+  [(ngModel)]='itemCouleur'
+  >
+  <label for="">Description</label>
+  <input
+  type='text'
+  placeholder='descriptiondu produit'
+  [(ngModel)]='itemNDesc'
+  >
+  <button class='btn btn-primary' 
+  (click)='onAdd()'
+  [disabled]= 'btnDisabled'>
+  
+  Ajouter un produit</button>
+</div>
+<!-- affihcer le nombre d'element dan sle tableau -->
+<div class="container">
+<p *ngIf = 'products.length === 1'> Vous avez {{products.length}} produit dans votre stock</p>
+<p [class.alert]= 'products.length >= 4' *ngIf = 'products.length > 1'> Vous avez {{products.length}} produits dans votre stock</p>
+<p [class.vide]= 'products.length === 0' *ngIf = 'products.length === 0'> Vous n'avez de produit dans votre stock</p>
+</div>
+</div><!-- fin de row -->
+</div><!-- fin de container -->
+<!-- row = rangée -->
+<!--  12 colonnes -->
